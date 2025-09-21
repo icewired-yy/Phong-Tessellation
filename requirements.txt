@@ -1,0 +1,7 @@
+glfw
+PyOpenGL
+numpy
+PyGLM
+trimesh
+faye-image
+OpenEXR

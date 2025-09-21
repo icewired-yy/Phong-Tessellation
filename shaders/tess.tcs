@@ -1,0 +1,27 @@
+#version 410 core
+
+layout (vertices = 3) out;
+
+in vec3 vs_pos[];
+in vec3 vs_normal[];
+
+out vec3 tcs_pos[];
+out vec3 tcs_normal[];
+
+uniform float tessLevel; // Uniform to control tessellation level
+
+void main()
+{
+    // Pass control points through
+    tcs_pos[gl_InvocationID] = vs_pos[gl_InvocationID];
+    tcs_normal[gl_InvocationID] = vs_normal[gl_InvocationID];
+
+    // Set tessellation levels for the patch (only for the first vertex)
+    if (gl_InvocationID == 0)
+    {
+        gl_TessLevelInner[0] = tessLevel;
+        gl_TessLevelOuter[0] = tessLevel;
+        gl_TessLevelOuter[1] = tessLevel;
+        gl_TessLevelOuter[2] = tessLevel;
+    }
+}
